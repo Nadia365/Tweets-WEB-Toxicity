@@ -16,14 +16,20 @@ This project is a Flask-based web application that scrapes Twitter posts based o
 ---
 
 ## 📂 Project Structure
-
+```bash
 ├── app.py # Main Flask application
+
 ├── models.py # Data class for posts
+
 ├── scraper.py # Twitter scraping logic (via Tweepy)
+
 ├── analyzer.py # Detoxify-based sentiment analyzer
+
 ├── dataset.py # Utility for saving post data to CSV
+
 ├── templates/
 │ └── index.html # Frontend template for user interaction
+
 ├── var.env # Environment file containing BEARER_TOKEN
 
 ## ⚙️ Requirements
