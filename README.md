@@ -174,4 +174,5 @@ docker run -p 5000:5000 toxicity-app
 Visit: http://localhost:5000
 ```
 ✅ Sample Output
-![Screenshot](https://github.com/Nadia365/nadya/tree/main/IMG/screenshot.png)
+
+![Screenshot](https://github.com/Nadia365/nadya/tree/main/IMG/Toxicity.png)
