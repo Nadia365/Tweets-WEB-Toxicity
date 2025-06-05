@@ -1,19 +1,13 @@
-# Tweets-WEB-Toxicity
-# 🧪 Toxicity Analyzer for Social Media Posts
+# Toxicity Analyzer for Social Media Posts
 
-This project is a Flask-based web application that scrapes Twitter posts based on a given hashtag, analyzes their toxicity using the [Detoxify](https://github.com/unitaryai/detoxify) model, and displays the results on a webpage. It is designed for French-language tweets and demonstrates the integration of web scraping, natural language processing, and frontend rendering.
+This project is a Flask-based web application that scrapes Twitter posts based on a hashtag, analyzes their toxicity using the Detoxify model, and displays the results on a simple web interface.
 
----
-
-## 🧩 Features
-
-- 🔍 Scrapes recent tweets using a custom hashtag (via Twitter API v2).
-- 🧠 Analyzes post toxicity using the Detoxify model.
-- 📄 Displays post content, platform, and toxicity score.
-- 💾 Saves analyzed posts to a CSV file for further processing.
-- 🌐 Web-based interface built with Flask.
-
----
+## 🌟 Features
+- 🔍 Scrape Twitter posts using a hashtag
+- 🧠 Detect toxic content using the Detoxify deep learning model
+- 📄 Export analyzed posts to a CSV dataset
+- 🖥️ Display results in a simple HTML interface
+- 🐳 Deployable via Docker
 
 ## 📂 Project Structure
 ```bash
@@ -31,8 +25,17 @@ This project is a Flask-based web application that scrapes Twitter posts based o
 │ └── index.html # Frontend template for user interaction
 
 ├── var.env # Environment file containing BEARER_TOKEN
+├── Dockerfile # Docker container definition
 
-## ⚙️ Requirements
+
+## 🔧 Environment Setup
+
+### 1. Clone the repository
+```bash
+git clone https://github.com/your-username/toxicity-analyzer-app.git
+cd toxicity-analyzer-app
+
+⚙️ Requirements
 
 - Python 3.8+
 - [Flask](https://palletsprojects.com/p/flask/)
@@ -40,7 +43,137 @@ This project is a Flask-based web application that scrapes Twitter posts based o
 - [Detoxify](https://github.com/unitaryai/detoxify)
 - [dotenv](https://pypi.org/project/python-dotenv/)
 
-##### Install dependencies:
+Install dependencies:
 
 ```bash
-pip install -r requirements.txt 
+pip install -r requirements.txt
+
+
+2. Set up environment variables
+Create a file named .env or var.env and add your Twitter Bearer Token:
+
+```bash
+BEARER_TOKEN=your_actual_bearer_token
+
+## 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+
+## 4. Run the application
+```bash
+python app.py
+Visit: http://localhost:5000
+
+## � Functional Overview
+1. scraper.py — Scraping Tweets
+Class: SimpleScraper
+
+Purpose: Retrieve tweets containing a specific hashtag using the Twitter API.
+
+Functions:
+
+scrape_twitter_posts(limit: int) – Scrapes recent tweets
+
+simulate_facebook_posts(limit: int) – Generates dummy Facebook posts for testing
+
+### Tools: tweepy, dotenv, os, logging
+
+## 2. models.py — Post Data Model
+Class: Post
+
+Purpose: Data structure representing a social media post.
+
+##Attributes:
+
+content: Text content of the post
+
+platform: Source (Twitter or Facebook)
+
+toxicity: Score between 0.0 (non-toxic) and 1.0 (very toxic)
+
+Tools: dataclasses
+
+3. analyzer.py — Toxicity Detection
+Class: ToxicityAnalyzer
+
+Purpose: Uses Detoxify to assign toxicity scores.
+
+Functions:
+
+analyze(posts: List[Post]) – Applies the Detoxify model to a list of posts
+
+Tools: detoxify, logging
+
+4. dataset.py — Save to CSV
+Class: SimpleDataset
+
+Purpose: Save analyzed data into a local CSV file.
+
+Functions:
+
+save_to_csv(posts) – Saves posts with toxicity scores to toxicity_dataset.csv
+
+Tools: csv, logging
+
+5. app.py — Flask App Logic
+Route: /
+
+Method: GET, POST
+
+Purpose:
+
+Accept hashtag input from user
+
+Scrape and analyze Twitter posts
+
+Save results to CSV
+
+Render them via an HTML template
+
+Tools: flask, render_template, request
+
+6. templates/index.html — Web UI
+Purpose: Simple HTML interface using Jinja2
+
+Components:
+
+```bash
+
+Hashtag input form
+
+Results table showing:
+
+Platform
+
+Post content
+
+Toxicity score
+
+Tools: HTML, Jinja2
+
+## 🐳 Docker Deployment
+1. Dockerfile
+```bash
+dockerfile
+FROM python:3.10-slim
+
+WORKDIR /app
+
+COPY . .
+
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+EXPOSE 5000
+
+CMD ["python", "app.py"]
+2. Build Docker Image
+```bash
+docker build -t toxicity-app .
+3. Run Docker Container
+```bash
+docker run -p 5000:5000 toxicity-app
+Visit: http://localhost:5000
+
+✅ Sample Output
