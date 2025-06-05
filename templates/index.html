@@ -1,1 +1,27 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Toxicity Analyzer</title>
+</head>
+<body>
+    <h1>Toxicité des Posts</h1>
+    <form method="post">
+        Hashtag (sans #): <input type="text" name="tag" required>
+        <input type="submit" value="Analyser">
+    </form>
+    {% if results %}
+        <h2>Résultats</h2>
+        <table border="1">
+            <tr><th>Plateforme</th><th>Contenu</th><th>Toxicité</th></tr>
+            {% for post in results %}
+                <tr>
+                    <td>{{ post.platform }}</td>
+                    <td>{{ post.content }}</td>
+                    <td>{{ "%.2f"|format(post.toxicity) }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>
