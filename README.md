@@ -65,93 +65,87 @@ python app.py
 ```
 Visit: http://localhost:5000
 
-## � Functional Overview
-1. scraper.py — Scraping Tweets
-Class: SimpleScraper
+## Functional Overview
 
-**Purpose: Retrieve tweets containing a specific hashtag using the Twitter API.**
+## 1. `scraper.py` — Scraping Tweets  
+**Class:** `SimpleScraper`  
+**Purpose:** Retrieve tweets containing a specific hashtag using the Twitter API.  
 
-### Functions:
+### Functions:  
+- `scrape_twitter_posts(limit: int)` – Scrapes recent tweets  
+- `simulate_facebook_posts(limit: int)` – Generates dummy Facebook posts for testing  
 
-scrape_twitter_posts(limit: int) – Scrapes recent tweets
+### Tools:  
+`tweepy`, `dotenv`, `os`, `logging`  
 
-simulate_facebook_posts(limit: int) – Generates dummy Facebook posts for testing
+---
 
-### Tools: tweepy, dotenv, os, logging
+## 2. `models.py` — Post Data Model  
+**Class:** `Post`  
 
-## 2. models.py — Post Data Model
-Class: Post
+**Purpose:** Data structure representing a social media post.  
 
-Purpose: Data structure representing a social media post.
+### Attributes:  
+- `content`: Text content of the post  
+- `platform`: Source (Twitter or Facebook)  
+- `toxicity`: Score between 0.0 (non-toxic) and 1.0 (very toxic)  
 
-##Attributes:
+### Tools:  
+`dataclasses`  
 
-## content: Text content of the post
+---
 
-## platform: Source (Twitter or Facebook)
+## 3. `analyzer.py` — Toxicity Detection  
+**Class:** `ToxicityAnalyzer`  
+**Purpose:** Uses Detoxify to assign toxicity scores.  
 
-## toxicity: Score between 0.0 (non-toxic) and 1.0 (very toxic)
+### Functions:  
+- `analyze(posts: List[Post])` – Applies the Detoxify model to a list of posts  
 
-## Tools: dataclasses
+### Tools:  
+`detoxify`, `logging`  
 
-***3. analyzer.py — Toxicity Detection***
-### Class: ToxicityAnalyzer
+---
 
-### Purpose: Uses Detoxify to assign toxicity scores.
+## 4. `dataset.py` — Save to CSV  
+**Class:** `SimpleDataset`  
+**Purpose:** Save analyzed data into a local CSV file.  
 
-### Functions:
+### Functions:  
+- `save_to_csv(posts)` – Saves posts with toxicity scores to `toxicity_dataset.csv`  
 
--analyze(posts: List[Post]) – Applies the Detoxify model to a list of posts
+### Tools:  
+`csv`, `logging`  
 
-#### -Tools: detoxify, logging
+---
 
-4. dataset.py — Save to CSV
-Class: SimpleDataset
+## 5. `app.py` — Flask App Logic  
+**Route:** `/`  
+**Method:** `GET`, `POST`  
 
-Purpose: Save analyzed data into a local CSV file.
+### Purpose:  
+- Accept hashtag input from user  
+- Scrape and analyze Twitter posts  
+- Save results to CSV  
+- Render them via an HTML template  
 
-### Functions:
+### Tools:  
+`flask`, `render_template`, `request`  
 
-save_to_csv(posts) – Saves posts with toxicity scores to toxicity_dataset.csv
+---
 
-#### Tools: csv, logging
+## 6. `templates/index.html` — Web UI  
+**Purpose:** Simple HTML interface using Jinja2  
 
-5. app.py — Flask App Logic
-Route: /
+### Components:  
+- Hashtag input form  
+- Results table showing:  
+  - Platform  
+  - Post content  
+  - Toxicity score  
 
-Method: GET, POST
-
-Purpose:
-
-Accept hashtag input from user
-
-Scrape and analyze Twitter posts
-
-Save results to CSV
-
-Render them via an HTML template
-
-Tools: flask, render_template, request
-
-6. templates/index.html — Web UI
-Purpose: Simple HTML interface using Jinja2
-
-Components:
-
-```bash
-
-Hashtag input form
-```
-
-#### Results table showing:
-
--Platform
-
--Post content
-
--Toxicity score
-
-### -Tools: HTML, Jinja2
+### Tools:  
+`HTML`, `Jinja2`  
 
 ## 🐳 Docker Deployment
 1. Dockerfile
@@ -180,4 +174,4 @@ docker run -p 5000:5000 toxicity-app
 Visit: http://localhost:5000
 ```
 ✅ Sample Output
-<img title="ToxicityScore" alt="Result" src="IMG/test1111.png" width="60" height="40" style="vertical-align:down; margin:4px"/>
+![Screenshot](https://github.com/Nadia365/nadya/tree/main/IMG/screenshot.png)
