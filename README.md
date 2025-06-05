@@ -26,16 +26,15 @@ This project is a Flask-based web application that scrapes Twitter posts based o
 
 ├── var.env # Environment file containing BEARER_TOKEN
 ├── Dockerfile # Docker container definition
-
-
+```
 ## 🔧 Environment Setup
 
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/your-username/toxicity-analyzer-app.git
 cd toxicity-analyzer-app
-
-⚙️ Requirements
+```
+## ⚙️ Requirements
 
 - Python 3.8+
 - [Flask](https://palletsprojects.com/p/flask/)
@@ -43,35 +42,36 @@ cd toxicity-analyzer-app
 - [Detoxify](https://github.com/unitaryai/detoxify)
 - [dotenv](https://pypi.org/project/python-dotenv/)
 
-Install dependencies:
+***1. Install dependencies:***
 
 ```bash
 pip install -r requirements.txt
+```
 
 
-2. Set up environment variables
+***2. Set up environment variables***
 Create a file named .env or var.env and add your Twitter Bearer Token:
 
 ```bash
 BEARER_TOKEN=your_actual_bearer_token
-
-## 3. Install dependencies
-
+```
+***3. Install dependencies***
 ```bash
 pip install -r requirements.txt
-
-## 4. Run the application
+```
+***4. Run the application***
 ```bash
 python app.py
+```
 Visit: http://localhost:5000
 
 ## � Functional Overview
 1. scraper.py — Scraping Tweets
 Class: SimpleScraper
 
-Purpose: Retrieve tweets containing a specific hashtag using the Twitter API.
+**Purpose: Retrieve tweets containing a specific hashtag using the Twitter API.**
 
-Functions:
+### Functions:
 
 scrape_twitter_posts(limit: int) – Scrapes recent tweets
 
@@ -86,35 +86,35 @@ Purpose: Data structure representing a social media post.
 
 ##Attributes:
 
-content: Text content of the post
+## content: Text content of the post
 
-platform: Source (Twitter or Facebook)
+## platform: Source (Twitter or Facebook)
 
-toxicity: Score between 0.0 (non-toxic) and 1.0 (very toxic)
+## toxicity: Score between 0.0 (non-toxic) and 1.0 (very toxic)
 
-Tools: dataclasses
+## Tools: dataclasses
 
-3. analyzer.py — Toxicity Detection
-Class: ToxicityAnalyzer
+***3. analyzer.py — Toxicity Detection***
+### Class: ToxicityAnalyzer
 
-Purpose: Uses Detoxify to assign toxicity scores.
+### Purpose: Uses Detoxify to assign toxicity scores.
 
-Functions:
+### Functions:
 
-analyze(posts: List[Post]) – Applies the Detoxify model to a list of posts
+-analyze(posts: List[Post]) – Applies the Detoxify model to a list of posts
 
-Tools: detoxify, logging
+#### -Tools: detoxify, logging
 
 4. dataset.py — Save to CSV
 Class: SimpleDataset
 
 Purpose: Save analyzed data into a local CSV file.
 
-Functions:
+### Functions:
 
 save_to_csv(posts) – Saves posts with toxicity scores to toxicity_dataset.csv
 
-Tools: csv, logging
+#### Tools: csv, logging
 
 5. app.py — Flask App Logic
 Route: /
@@ -141,16 +141,17 @@ Components:
 ```bash
 
 Hashtag input form
+```
 
-Results table showing:
+#### Results table showing:
 
-Platform
+-Platform
 
-Post content
+-Post content
 
-Toxicity score
+-Toxicity score
 
-Tools: HTML, Jinja2
+### -Tools: HTML, Jinja2
 
 ## 🐳 Docker Deployment
 1. Dockerfile
@@ -168,12 +169,15 @@ RUN pip install -r requirements.txt
 EXPOSE 5000
 
 CMD ["python", "app.py"]
+```
 2. Build Docker Image
 ```bash
 docker build -t toxicity-app .
+```
 3. Run Docker Container
 ```bash
 docker run -p 5000:5000 toxicity-app
 Visit: http://localhost:5000
-
+```
 ✅ Sample Output
+<img title="ToxicityScore" alt="Result" src="IMG/test1111.png" width="60" height="40" style="vertical-align:down; margin:4px"/>
