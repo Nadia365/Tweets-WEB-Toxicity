@@ -175,4 +175,4 @@ Visit: http://localhost:5000
 ```
 ✅ Sample Output
 
-<img src="Toxicity.png" alt="Toxicity Analyzer" width="600">
+<img src="Toxicity.png" alt="Toxicity Analyzer" width="1000">
