@@ -175,4 +175,4 @@ Visit: http://localhost:5000
 ```
 ✅ Sample Output
 
-![Screenshot](https://github.com/Nadia365/nadya/tree/main/IMG/Toxicity.png)
+<img src="IMG/Toxicity.png" alt="Toxicity Analyzer" width="600">
