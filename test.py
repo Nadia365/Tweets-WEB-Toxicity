@@ -2,6 +2,5 @@ import os
 from dotenv import load_dotenv 
 
 load_dotenv('var.env')
-#BEARER_TOKEN="AAAAAAAAAAAAAAAAAAAAAHup2AEAAAAAaDJ6uIMAz9m4%2FJIp1tuSqvPQtBA%3Dlx89suzJRbZMQG726y6g5yTkrXQ3Y8Iuj7I5cC0xjmc9dxNsUJ"
 BEARER_TOKEN = os.getenv('BEARER_TOKEN')
 print(BEARER_TOKEN)
