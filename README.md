@@ -95,7 +95,44 @@ Visit: http://localhost:5000
 
 ---
 
-## 3. `analyzer.py` — Toxicity Detection  
+## 3. `post_cleaner.py` — Tweet Cleaning  
+**Class:** `PostClean`  
+
+**Purpose:** Preprocesses and cleans social media posts for toxicity analysis.  
+
+### Functions:  
+- `normalize_clean_tweets(raw_data)` – Cleans and normalizes a list of raw tweets  
+
+### Cleaning Steps:  
+- Removes emojis, punctuation, and special characters  
+- Converts text to lowercase  
+- Removes URLs, hashtags, and mentions  
+- Removes French stopwords  
+- Applies lemmatization  
+
+### Tools:  
+`re`, `nltk`, `emoji`, `spacy`, `logging`  
+
+---
+
+## 4. `mongodb_handler.py` — MongoDB Storage  
+**Class:** `MongoDBHandler`  
+
+**Purpose:** Stores cleaned and analyzed posts into a MongoDB collection.  
+
+### Functions:  
+- `insert_posts(posts: List[Post])` – Inserts cleaned posts into MongoDB  
+
+### Stored Fields:  
+- `content`: Cleaned post text  
+- `platform`: Platform name (e.g., Twitter)  
+- `toxicity`: Toxicity score  
+
+### Tools:  
+`pymongo`, `logging` 
+
+
+## 5. `analyzer.py` — Toxicity Detection  
 **Class:** `ToxicityAnalyzer`  
 **Purpose:** Uses Detoxify to assign toxicity scores.  
 
@@ -107,7 +144,7 @@ Visit: http://localhost:5000
 
 ---
 
-## 4. `dataset.py` — Save to CSV  
+## 6. `dataset.py` — Save to CSV  
 **Class:** `SimpleDataset`  
 **Purpose:** Save analyzed data into a local CSV file.  
 
@@ -119,14 +156,15 @@ Visit: http://localhost:5000
 
 ---
 
-## 5. `app.py` — Flask App Logic  
+## 7. `app.py` — Flask App Logic  
 **Route:** `/`  
 **Method:** `GET`, `POST`  
 
 ### Purpose:  
 - Accept hashtag input from user  
-- Scrape and analyze Twitter posts  
-- Save results to CSV  
+- Scrape and clean Twitter posts
+- Analyze twitter posts
+- Save results to CSV/MongodB  
 - Render them via an HTML template  
 
 ### Tools:  
@@ -134,7 +172,7 @@ Visit: http://localhost:5000
 
 ---
 
-## 6. `templates/index.html` — Web UI  
+## 8. `templates/index.html` — Web UI  
 **Purpose:** Simple HTML interface using Jinja2  
 
 ### Components:  
