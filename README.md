@@ -213,4 +213,4 @@ Visit: http://localhost:5000
 ```
 ✅ Sample Output
 
-<img src="Toxicity.png" alt="Toxicity Analyzer" width="1000">
+<img src="Toxicity.png" alt="Toxicity Analyzer1" width="1500">
